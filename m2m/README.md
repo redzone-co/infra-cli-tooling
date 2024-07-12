@@ -8,10 +8,10 @@
 
 ## Quickstart
 
-1. Create an Machine To Machine (M2M) application in the Auth0 Tenant
+1. Create a Machine To Machine (M2M) application in the Auth0 Tenant (auth0.com) and note the Auth0 Application ID
 2. Generate a private and public key pair in PEM format (see below)**
-3. Configure the M2M application to authenticate using Private Key JWT by uploading the public PEM
-4. Verify all is configured using this tool as shown below:
+3. Configure the M2M application to authenticate using Private Key JWT by uploading the public PEM to the application authentication in auth0.com
+4. Verify M2M application can acquire an access token from the private PEM as shown below:
 
 ```
 poetry install
@@ -22,7 +22,7 @@ poetry run cli m2m access-token [AUTH0 APP ID] /path/to/private/pem/file.pem
 abcdefg...blah..blah
 ```
 
-5. To verify that the access token returned by Auth0 is valid, you can check it in jwt.io. It should look like this:
+5. To verify that the access token returned by Auth0 is valid, you can paste it into jwt.io. It should look like this:
 
 Header:
 
@@ -80,53 +80,52 @@ This tool was built using typer, so it has fairly robust help documentation.
 
 ```
 $ poetry run cli --help
-                                                                                                                                                                                                                                                               
- Usage: cli [OPTIONS] COMMAND [ARGS]...                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                               
-╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current shell.                                                                                                                                                                                     │
-│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                                                                                                                                              │
-│ --help                        Show this message and exit.                                                                                                                                                                                                   │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ m2m   manage auth0 m2m service account credentials                                                                                                                                                                                                          │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                                                                                              
+ Usage: cli [OPTIONS] COMMAND [ARGS]...                                                                                       
+                                                                                                                              
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                                    │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.             │
+│ --help                        Show this message and exit.                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ m2m   manage auth0 m2m service account credentials                                                                         │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 
 ```
-$ poetry run cli m2m --help 
-                                                                                                                                                                                                                                                               
- Usage: cli m2m [OPTIONS] COMMAND [ARGS]...                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                               
- manage auth0 m2m service account credentials                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                                               
-╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --help          Show this message and exit.                                                                                                                                                                                                                 │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ access-token   log in with private key                                                                                                                                                                                                                      │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+$ poetry run cli m2m --help
+
+Usage: cli m2m [OPTIONS] COMMAND [ARGS]...
+
+manage auth0 m2m service account credentials
+
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                                                │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ access-token   log in with private key                                                                                     │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 
 ```
-$ poetry run cli m2m access-token --help 
-                                                                                                                                                                                                                                                               
- Usage: cli m2m access-token [OPTIONS] CLIENT_ID PATH [DOMAIN] [URL]                                                                                                                                                                                           
-                                                                                                                                                                                                                                                               
- log in with private key                                                                                                                                                                                                                                       
-                                                                                                                                                                                                                                                               
-╭─ Arguments ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ *    client_id      TEXT      Auth0 M2M Application Client ID [default: None] [required]                                                                                                                                                                    │
-│ *    path           FILE      Path to Private PEM file [default: None] [required]                                                                                                                                                                           │
-│      domain         [DOMAIN]  Auth0 Domain [default: sandbox-redzone-co.us.auth0.com]                                                                                                                                                                       │
-│      url            [URL]     Auth0 Tenant API URL [default: https://redzone-co/api/v1/resource/server]                                                                                                                                                     │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --help          Show this message and exit.                                                                                                                                                                                                                 │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+$ poetry run cli m2m access-token --help
 
+Usage: cli m2m access-token [OPTIONS] CLIENT_ID PATH [DOMAIN] [URL]
+
+log in with private key
+
+╭─ Arguments ────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *    client_id      TEXT      Auth0 M2M Application Client ID [default: None] [required]                                   │
+│ *    path           FILE      Path to Private PEM file [default: None] [required]                                          │
+│      domain         [DOMAIN]  Auth0 Domain [default: sandbox-redzone-co.us.auth0.com]                                      │
+│      url            [URL]     Auth0 Tenant API URL [default: https://redzone-co/api/v1/resource/server]                    │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                                                │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 
