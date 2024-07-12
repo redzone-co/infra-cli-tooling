@@ -6,20 +6,6 @@ from auth0.authentication import GetToken
 
 app = typer.Typer()
 
-"""
-# bash function that I use to generate private and public pem keys...
-
-gen-key-pair(){
- TIER=$1
- SVC=$2
- openssl genrsa -out $TIER-$SVC-msvc.pem 4096
- openssl rsa -in $TIER-$SVC-msvc.pem -outform PEM -pubout -out $TIER-$SVC-msvc.pem.pub
- ls -lsa
- cat $TIER-$SVC-msvc.pem
- cat $TIER-$SVC-msvc.pem.pub
-}
-"""
-
 @app.command(help="log in with private key")
 def access_token(
         client_id: Annotated[str, typer.Argument(help="Auth0 M2M Application Client ID")],

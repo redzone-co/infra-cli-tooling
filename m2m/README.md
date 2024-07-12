@@ -9,7 +9,7 @@
 ## Quickstart
 
 1. Create an Machine To Machine (M2M) application in the Auth0 Tenant
-2. Generate a private and public key pair in PEM format (see below)
+2. Generate a private and public key pair in PEM format (see below)**
 3. Configure the M2M application to authenticate using Private Key JWT by uploading the public PEM
 4. Verify all is configured using this tool as shown below:
 
@@ -129,3 +129,19 @@ $ poetry run cli m2m access-token --help
 
 ```
 
+
+## How To Create PEM files
+
+Here's a bash function that I use to generate private and public pem keys...
+
+```
+gen-key-pair(){
+ TIER=$1
+ SVC=$2
+ openssl genrsa -out $TIER-$SVC-msvc.pem 4096
+ openssl rsa -in $TIER-$SVC-msvc.pem -outform PEM -pubout -out $TIER-$SVC-msvc.pem.pub
+ ls -lsa
+ cat $TIER-$SVC-msvc.pem
+ cat $TIER-$SVC-msvc.pem.pub
+}
+```
